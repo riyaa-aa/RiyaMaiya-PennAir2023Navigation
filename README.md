@@ -24,7 +24,7 @@ Task three outputs:
     The minimum distance to travel to all 14 waypoints = 13358.79556824653
     The shortest route to take = [0, 13, 4, 5, 6, 7, 8, 9, 10, 11, 12, 3, 2, 1, 0]
 
-
 3. **Please provide instructions on how to run your code.**
+python pennair_code.py or python3 pennair_code.py
 
 4. **Is there any other relevant information that would be helpful for us to know?**

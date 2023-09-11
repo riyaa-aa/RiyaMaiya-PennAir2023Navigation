@@ -1,13 +1,11 @@
 import json
-import geopy
 from geopy.distance import geodesic
 import math
-from sys import maxsize
-from itertools import permutations
 import numpy as np
 import matplotlib.pyplot as plt
 
 # task 1
+
 f = open('data/coords.json')
 data = json.load(f)
 
@@ -20,6 +18,7 @@ for i in data['waypoints']:
     '''
 
 # task 2
+
 def find_distance(wp1, wp2):
     lat1 = list(wp1.values())[0] # latitude of waypoint 1
     long1 = list(wp1.values())[1] # longitude of waypoint 1
@@ -168,10 +167,23 @@ def get_coords(waypoint, min_lat, min_long):
 
     # x = math.dist(min_lat,wp_long)
     # y = math.dist(min_long,wp_lat)
-    x = abs(min_lat - wp_long)
-    y = abs(min_long - wp_lat)
+    x = abs(wp_long - min_long)
+    y = abs(wp_lat - min_lat)
+    # x = wp_long
+    # y = wp_lat
 
     return x,y
+
+def draw_arrows(xarr, yarr):
+    x0 = xarr[i]
+    x1 = xarr[i+1]
+    y0 = yarr[i]
+    y1 = yarr[i+1]
+    xpos = (x0+x1)/2
+    ypos = (y0+y1)/2
+    xdir = x1-x0
+    ydir = y1-y0
+    return xpos, ypos, xdir, ydir
 
 xcoordsArr = []
 ycoordsArr = []
@@ -181,10 +193,16 @@ for i in route:
     xcoordsArr.append(x)
     ycoordsArr.append(y)
 
+plt.scatter(xcoordsArr,ycoordsArr)
 plt.plot(xcoordsArr,ycoordsArr)
-plt.xlabel('dist btwn wp & min lat')
-plt.ylabel('dist btwn wp & min long')
+plt.xlabel('longitude')
+plt.ylabel('latitude')
 plt.grid('equal')
+plt.text(xcoordsArr[0]-4e-4,ycoordsArr[0]+4e-4, "start")
+for i in range(len(xcoordsArr)-1):
+    xpos, ypos, xdir, ydir = draw_arrows(xcoordsArr,ycoordsArr)
+    plt.annotate("", xytext=(xpos,ypos),xy=(xpos+0.001*xdir,ypos+0.001*ydir), 
+    arrowprops=dict(arrowstyle="->", color='k'), size = 20)
 plt.show()
 
 f.close()
