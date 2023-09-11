@@ -3,6 +3,7 @@ from geopy.distance import geodesic
 import math
 import numpy as np
 import matplotlib.pyplot as plt
+from python_tsp.exact import solve_tsp_dynamic_programming
 
 # task 1
 
@@ -76,7 +77,7 @@ n = 14
 # using a bitmask to represent which waypoints have been visited,
 # a bitmask of 00000000000000 would mean all 14 waypoints have been visited.
 
-memo = [[(-1, [])]*(1 << (n)) for _ in range(n)] # list of lists of -1s
+memo = [[(-1, [])]*(1 << (n)) for _ in range(n)] # list of lists of -1s + empty lists to store route
 # memoization is a way to speed up & optimize recursion programs
 # by storing intermediate results to avoid repeated results
 
@@ -146,6 +147,15 @@ print("The minimum distance to travel to all 14 waypoints = " + str(min_d))
 print("The shortest route to take = " + str(route))
 # output: [0, 13, 4, 5, 6, 7, 8, 9, 10, 11, 12, 3, 2, 1, 0]
 
+# using a python library to check if my code outputs the correct answer
+distance_matrix = np.array(dist_arr)
+permutation, distance = solve_tsp_dynamic_programming(distance_matrix)
+print("permutation: " + str(permutation))
+# output: [0, 13, 4, 5, 6, 7, 8, 9, 10, 11, 12, 3, 2, 1]
+print("distance: " + str(distance))
+# output: 13358.79556824653
+# code is correct!
+
 # task 4
 
 minLat = 90
@@ -199,10 +209,11 @@ plt.xlabel('longitude')
 plt.ylabel('latitude')
 plt.grid('equal')
 plt.text(xcoordsArr[0]-4e-4,ycoordsArr[0]+4e-4, "start")
+plt.title('shortest route')
 for i in range(len(xcoordsArr)-1):
     xpos, ypos, xdir, ydir = draw_arrows(xcoordsArr,ycoordsArr)
     plt.annotate("", xytext=(xpos,ypos),xy=(xpos+0.001*xdir,ypos+0.001*ydir), 
     arrowprops=dict(arrowstyle="->", color='k'), size = 20)
-plt.show()
+#plt.show()
 
 f.close()

@@ -25,6 +25,11 @@ Task three outputs:
     The shortest route to take = [0, 13, 4, 5, 6, 7, 8, 9, 10, 11, 12, 3, 2, 1, 0]
 
 3. **Please provide instructions on how to run your code.**
-python pennair_code.py or python3 pennair_code.py
+open terminal -> cd directory that you placed unzipped file into -> python tasks.py or python3 tasks.py
+you might need to install some libraries:
+    pip/pip3 install numpy, 
+    pip/pip3 install python-tsp, 
+    pip/pip3 install matplotlib, 
+    pip/pip3 install geopy
 
 4. **Is there any other relevant information that would be helpful for us to know?**
