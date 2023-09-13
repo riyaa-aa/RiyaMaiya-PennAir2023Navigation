@@ -16,9 +16,9 @@ def find_distance(wp1, wp2):
     long1 = list(wp1.values())[1] # longitude of waypoint 1
     alt1 = list(wp1.values())[2] # altitude of waypoint 1
 
-    lat2 = list(wp2.values())[0]
-    long2 = list(wp2.values())[1]
-    alt2 = list(wp2.values())[2]
+    lat2 = list(wp2.values())[0] # latitude of waypoint 2
+    long2 = list(wp2.values())[1] # longitude of waypoint 2
+    alt2 = list(wp2.values())[2] # altitude of waypoint 2
 
     dist_ll = geodesic((lat1, long1), (lat2, long2)).feet
     dist = np.sqrt(((abs(alt2 - alt1))**2)+(dist_ll**2))
@@ -50,12 +50,13 @@ for i in range(14):
 # hamiltonian cycle: every node visited once, come back to the starting node
 # minimize the total cost of this cycle; output the minimum weight hamiltonian cycle
 
-# number of nodes -- 14 waypoints
+# number of nodes --> 14 waypoints
 n = 14 
 
 # memoization for top-down recursion
 # using a bitmask to represent which waypoints have been visited,
-# a bitmask of 00000000000000 would mean all 14 waypoints have been visited.
+# a bitmask of 00000000000000 would mean there are no more available waypoints to visit.
+# a bitmask of 00010010000100 would mean that there are 3 more waypoints to visit; the value stored for that mask would be the minimum distance between these 3 waypoints.
 
 memo = [[(-1, [])]*(1 << (n)) for _ in range(n)] # list of lists of -1s + empty lists to store route
 # memoization is a way to speed up & optimize recursion programs
