@@ -5,12 +5,12 @@ import numpy as np
 import matplotlib.pyplot as plt
 from python_tsp.exact import solve_tsp_dynamic_programming
 
-# task 1
+# TASK 1
 
 f = open('data/coords.json')
 data = json.load(f)
 
-# task 2
+# TASK 2
 
 def find_distance(wp1, wp2):
     lat1 = list(wp1.values())[0] # latitude of waypoint 1
@@ -33,7 +33,7 @@ waypoint2 = data['waypoints'][1]
 # find_distance(waypoint1, waypoint2)
 # output: 1350.9321704989154 which is correct!
 
-# task 3
+# TASK 3
 
 dist_arr = [[0 for i in range(14)] for j in range(14)] # initializes a 2d array that is 14x14, where each element = 0
 
@@ -111,7 +111,7 @@ permutation, distance = solve_tsp_dynamic_programming(distance_matrix)
 # distance output: 13358.79556824653
 # code is correct!
 
-# task 4
+# TASK 4
 
 minLat = 90
 minLong = 90
