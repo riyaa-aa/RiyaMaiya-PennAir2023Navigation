@@ -1,6 +1,5 @@
 import json
 from geopy.distance import geodesic
-import math
 import numpy as np
 import matplotlib.pyplot as plt
 from python_tsp.exact import solve_tsp_dynamic_programming
@@ -22,7 +21,7 @@ def find_distance(wp1, wp2):
     alt2 = list(wp2.values())[2]
 
     dist_ll = geodesic((lat1, long1), (lat2, long2)).feet
-    dist = math.sqrt(((abs(alt2 - alt1))**2)+(dist_ll**2))
+    dist = np.sqrt(((abs(alt2 - alt1))**2)+(dist_ll**2))
 
     return dist
 
